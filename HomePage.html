@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="HomePage.css" />
+    <title>MandiWatch</title>
+</head>
+<body>
+    <div class="page-grid">
+        <div class="main-content">
+            <!-- Hero Section -->
+            <div class="center-rectangle">
+                <div class="nav-align-right">
+                    <ul class="top-nav">
+                        <li><a href="#login">Login</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="center-content">
+                    <h1 class="rectangle-heading">Welcome to MANDIWATCH</h1>
+                    <p style="color: white; font-size: 1.2rem; margin-top: 20px;">Your trusted partner in agricultural market intelligence</p>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <p>Scroll down to explore</p>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="content-sections">
+                <!-- First Image Section - Image on left, content on right -->
+                <div class="image-section">
+                    <div class="image-container">
+                        <div class="image-wrapper fade-in">
+                            <img src="happy.jpg" alt="Financial Markets" />
+                        </div>
+                        <div class="content-wrapper fade-in">
+                            <h2>Welcome to MANDIWATCH</h2>
+                            <p>Experience the future of agricultural market intelligence with our comprehensive platform. Track real-time prices, analyze market trends, and make informed decisions with confidence.</p>
+                            <a href="#" class="cta-button">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Image Section - Content on left, image on right -->
+                <div class="image-section">
+                    <div class="image-container reverse">
+                        <div class="image-wrapper fade-in">
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Happy Farmers" />
+                        </div>
+                        <div class="content-wrapper fade-in">
+                            <h2>Empowering Farmers</h2>
+                            <p>Join thousands of satisfied farmers who have transformed their agricultural business with our innovative tools and real-time market insights.</p>
+                            <a href="#" class="cta-button">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Image Section - Image on left, content on right -->
+                <div class="image-section">
+                    <div class="image-container">
+                        <div class="image-wrapper fade-in">
+                            <img src="green.jpg" alt="Green Agriculture" />
+                        </div>
+                        <div class="content-wrapper fade-in">
+                            <h2>Sustainable Agriculture</h2>
+                            <p>Promote eco-friendly farming practices while maximizing your profits. Our platform helps you find the perfect balance between sustainability and profitability.</p>
+                            <a href="#" class="cta-button">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth Image Section - Content on left, image on right -->
+                <div class="image-section">
+                    <div class="image-container reverse">
+                        <div class="image-wrapper fade-in">
+                            <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Market Analysis" />
+                        </div>
+                        <div class="content-wrapper fade-in">
+                            <h2>Market Intelligence</h2>
+                            <p>Stay ahead of the competition with our advanced analytics and forecasting tools. Make data-driven decisions that drive your success.</p>
+                            <a href="#" class="cta-button">Start Trading</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Add smooth scrolling to navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
