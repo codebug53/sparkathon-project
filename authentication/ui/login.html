@@ -39,7 +39,7 @@
             Don't have an account? <a href="register.html">Register here</a>.
         </p>
     </div>
-    <!-- Place at the end of body in index.html -->
+    
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -63,7 +63,7 @@ document.getElementById("login-form").addEventListener("submit", async (event) =
     try {
         await signInWithEmailAndPassword(auth, email, password);
         showSuccess("Login successful!");
-        setTimeout(() => window.location.href = "dashboard.html", 1200);
+        setTimeout(() => window.location.href = "../../index.html", 1200);
     } catch (error) {
         showError(error.message);
     }
@@ -74,7 +74,7 @@ document.getElementById("google-login").addEventListener("click", async () => {
     try {
         await signInWithPopup(auth, provider);
         showSuccess("Logged in with Google!");
-        setTimeout(() => window.location.href = "dashboard.html", 1200);
+        setTimeout(() => window.location.href = "../../index.html", 1200);
     } catch (error) {
         showError(error.message);
     }

@@ -1,5 +1,3 @@
-// filepath: /firebase-login-app/firebase-login-app/src/login.js
-
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase";
 
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Helper functions for feedback
 function showSuccess(msg) {
     showToast(msg, "success");
 }
