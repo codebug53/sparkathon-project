@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="login-all.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+    <p class="links">
+        <a href="../../index.html">Go to Home</a>
+    </p>
+    <h1>Create Account</h1>
+        <form id="register-form" autocomplete="off">
+            <div class="input-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" name="reg-email" required autocomplete="username" />
+            </div>
+            <div class="input-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" name="reg-password" required autocomplete="new-password" />
+            </div>
+            <div class="input-group">
+                <label for="reg-confirm">Confirm Password</label>
+                <input type="password" id="reg-confirm" name="reg-confirm" required autocomplete="new-password" />
+            </div>
+            <button type="submit" class="btn primary">Register</button>
+        </form>
+        <div class="divider"><span>or</span></div>
+        <div class="social-login">
+            <button id="google-register" class="btn google">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
+                Sign up with Google
+            </button>
+        </div>
+        <p class="links">
+            Already have an account? <a href="login.html">Login here</a>.
+        </p>
+        <p class="links">
+            <a href="forgot-password.html">Forgot your password?</a>
+        </p>
+    </div>
+    <!-- Place at the end of body in register.html -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBCB-ZoEadQlqyrROHh7-wBf8YtEK4Dytk",
+  authDomain: "mandi-watch-sparkathon.firebaseapp.com",
+  projectId: "mandi-watch-sparkathon",
+  storageBucket: "mandi-watch-sparkathon.firebasestorage.app",
+  messagingSenderId: "49260303491",
+  appId: "1:49260303491:web:b8b29e1e9fb5cba67477b6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.getElementById("register-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = document.getElementById("reg-email").value;
+    const password = document.getElementById("reg-password").value;
+    const confirm = document.getElementById("reg-confirm").value;
+
+    if (password !== confirm) {
+        showError("Passwords do not match.");
+        return;
+    }
+
+    try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        showSuccess("Registration successful!");
+        setTimeout(() => window.location.href = "login.html", 1200);
+    } catch (error) {
+        showError(error.message);
+    }
+});
+
+document.getElementById("google-register").addEventListener("click", async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+        await signInWithPopup(auth, provider);
+        showSuccess("Signed up with Google!");
+        setTimeout(() => window.location.href = "login.html", 1200);
+    } catch (error) {
+        showError(error.message);
+    }
+});
+
+function showSuccess(msg) { showToast(msg, "success"); }
+function showError(msg) { showToast(msg, "error"); }
+function showToast(msg, type) {
+    let toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.classList.add("show"); }, 10);
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+    }, 1800);
+}
+</script>
+</body>
+</html>

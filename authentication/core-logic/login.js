@@ -1,0 +1,53 @@
+// filepath: /firebase-login-app/firebase-login-app/src/login.js
+
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "./firebase";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("login-form");
+    const googleBtn = document.getElementById("google-login");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            await signInWithEmailAndPassword(auth, username, password);
+            showSuccess("Login successful!");
+            setTimeout(() => window.location.href = "/dashboard", 1200);
+        } catch (error) {
+            showError(error.message);
+        }
+    });
+
+    googleBtn.addEventListener("click", async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+            showSuccess("Logged in with Google!");
+            setTimeout(() => window.location.href = "/dashboard", 1200);
+        } catch (error) {
+            showError(error.message);
+        }
+    });
+});
+
+// Helper functions for feedback
+function showSuccess(msg) {
+    showToast(msg, "success");
+}
+function showError(msg) {
+    showToast(msg, "error");
+}
+function showToast(msg, type) {
+    let toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.classList.add("show"); }, 10);
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+    }, 1800);
+}

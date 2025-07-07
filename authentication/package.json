@@ -1,0 +1,15 @@
+{
+  "name": "firebase-login-app",
+  "version": "1.0.0",
+  "description": "A simple login application using Firebase for authentication.",
+  "main": "src/login.js",
+  "scripts": {
+    "start": "live-server public",
+    "build": "echo 'Build step not defined yet.'"
+  },
+  "dependencies": {
+    "firebase": "^9.0.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
