@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("login-form");
     const googleBtn = document.getElementById("google-login");
 
+    const redirectTo = "https://bid-bay-marketplace-auction.lovable.app/";
+
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const username = document.getElementById("username").value;
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             await signInWithEmailAndPassword(auth, username, password);
             showSuccess("Login successful!");
-            setTimeout(() => window.location.href = "/dashboard", 1200);
+            setTimeout(() => window.location.href = redirectTo, 1200);
         } catch (error) {
             showError(error.message);
         }
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             await signInWithPopup(auth, provider);
             showSuccess("Logged in with Google!");
-            setTimeout(() => window.location.href = "/dashboard", 1200);
+            setTimeout(() => window.location.href = redirectTo, 1200);
         } catch (error) {
             showError(error.message);
         }
