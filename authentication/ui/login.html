@@ -40,61 +40,60 @@
         </p>
     </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBCB-ZoEadQlqyrROHh7-wBf8YtEK4Dytk",
-  authDomain: "mandi-watch-sparkathon.firebaseapp.com",
-  projectId: "mandi-watch-sparkathon",
-  storageBucket: "mandi-watch-sparkathon.firebasestorage.app",
-  messagingSenderId: "49260303491",
-  appId: "1:49260303491:web:b8b29e1e9fb5cba67477b6"
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyBCB-ZoEadQlqyrROHh7-wBf8YtEK4Dytk",
+        authDomain: "mandi-watch-sparkathon.firebaseapp.com",
+        projectId: "mandi-watch-sparkathon",
+        storageBucket: "mandi-watch-sparkathon.firebasestorage.app",
+        messagingSenderId: "49260303491",
+        appId: "1:49260303491:web:b8b29e1e9fb5cba67477b6"
+    };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const redirectTo = "https://bid-bay-marketplace-auction.lovable.app/";
 
-const redirectTo = "https://bid-bay-marketplace-auction.lovable.app/";
+    document.getElementById("login-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            showSuccess("Login successful!");
+            setTimeout(() => window.location.replace(redirectTo), 1200);
+        } catch (error) {
+            showError(error.message);
+        }
+    });
 
-document.getElementById("login-form").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const email = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    try {
-        await signInWithEmailAndPassword(auth, email, password);
-        showSuccess("Login successful!");
-        setTimeout(() => window.location.replace(redirectTo), 1200);
-    } catch (error) {
-        showError(error.message);
+    document.getElementById("google-login").addEventListener("click", async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+            showSuccess("Logged in with Google!");
+            setTimeout(() => window.location.replace(redirectTo), 1200);
+        } catch (error) {
+            showError(error.message);
+        }
+    });
+
+    function showSuccess(msg) { showToast(msg, "success"); }
+    function showError(msg) { showToast(msg, "error"); }
+    function showToast(msg, type) {
+        let toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => { toast.classList.add("show"); }, 10);
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 400);
+        }, 1800);
     }
-});
-
-document.getElementById("google-login").addEventListener("click", async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-        await signInWithPopup(auth, provider);
-        showSuccess("Logged in with Google!");
-        setTimeout(() => window.location.replace(redirectTo), 1200);
-    } catch (error) {
-        showError(error.message);
-    }
-});
-
-function showSuccess(msg) { showToast(msg, "success"); }
-function showError(msg) { showToast(msg, "error"); }
-function showToast(msg, type) {
-    let toast = document.createElement("div");
-    toast.className = `toast ${type}`;
-    toast.textContent = msg;
-    document.body.appendChild(toast);
-    setTimeout(() => { toast.classList.add("show"); }, 10);
-    setTimeout(() => {
-        toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 400);
-    }, 1800);
-}
-</script>
+    </script>
 </body>
 </html>
