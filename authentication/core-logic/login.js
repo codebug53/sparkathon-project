@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             await signInWithEmailAndPassword(auth, username, password);
             showSuccess("Login successful!");
-            setTimeout(() => window.location.href = redirectTo, 1200);
+            setTimeout(() => window.location.replace(redirectTo), 1200);
+
         } catch (error) {
             showError(error.message);
         }
@@ -26,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             await signInWithPopup(auth, provider);
             showSuccess("Logged in with Google!");
-            setTimeout(() => window.location.href = redirectTo, 1200);
+            setTimeout(() => window.location.replace(redirectTo), 1200);
+
         } catch (error) {
             showError(error.message);
         }
