@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("login-form");
     const googleBtn = document.getElementById("google-login");
 
-    const redirectTo = "https://bid-bay-marketplace-auction.lovable.app/";
+    const redirectTo = "https://preview--mandiwatch-bazaar-suno.lovable.app/";
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
